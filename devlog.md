@@ -21,4 +21,9 @@ Commit 1: Bare bones logger that reads stdin and writes raw messages to a file w
 Thoughts before continuing: Now that the basic logger works, I want to format each line properly. I need to split each line into an action and the rest of the message. Also planning to add input validation in case the line is malformed.
 
 
+## March 23, 2025, 12:30 AM
+Added split logic for separating action and message. I was getting index errors at first when the input didn’t have a space, so I added a check to skip lines that don’t split into two parts. Also tested the timestamp formatting and it seems to match the required format. Trying different sample inputs now.
 
+
+## March 23, 2025, 1:00 AM
+Commit 2: Final logger implementation with timestamp, action/message split, and error handling

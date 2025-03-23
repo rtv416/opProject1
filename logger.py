@@ -1,4 +1,9 @@
 import sys
+import datetime
+
+def get_timestamp():
+    now = datetime.datetime.now()
+    return now.strftime("%Y-%m-%d %H:%M")
 
 def main():
     if len(sys.argv) != 2:
@@ -18,7 +23,17 @@ def main():
                 if line == "QUIT":
                     break
 
-                logfile.write(line + '\n')
+                if line == "":
+                    continue
+
+                parts = line.split(maxsplit=1)
+                if len(parts) < 2:
+                    continue  # skip malformed input
+
+                action = parts[0]
+                message = parts[1]
+                timestamp = get_timestamp()
+                logfile.write(f"{timestamp} [{action}] {message}\n")
                 logfile.flush()
 
     except Exception as e:
