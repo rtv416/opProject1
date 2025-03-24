@@ -87,3 +87,85 @@ Did final testing of all commands. PASS, ENCRYPT, DECRYPT, and QUIT all work. Er
 
 March 23, 2025, 5:45 PM
 Commit: Final working encryption program with passkey storage, input validation, cipher logic, and proper error/flush handling.
+
+
+March 23, 2025, 6:00 PM
+Thoughts so far: Starting on the driver program. This will be the main program that launches the logger and encryption modules as subprocesses. It will also handle user interaction through a menu. Planning to begin by getting the subprocesses launched.
+
+March 23, 2025, 6:10 PM
+Set up the skeleton for the driver script. Parsed the log file name from sys.argv and added a usage message if it's missing.
+
+March 23, 2025, 6:20 PM
+Using subprocess.Popen to start the logger and encryption programs. Redirected stdin and stdout as needed. Still need to confirm communication between processes.
+
+March 23, 2025, 6:35 PM
+Added helper function to send a message to encryption and receive a response from stdout. Flushing the encryption stdin to make sure the message goes through.
+
+March 23, 2025, 6:50 PM
+Built a log() function that sends timestamped messages to the logger. For now, just testing that START gets logged properly when the program launches.
+
+March 23, 2025, 7:00 PM
+Started writing the main command menu. Prompting the user to choose from password, encrypt, decrypt, history, and quit.
+
+March 23, 2025, 7:10 PM
+Implemented initial input loop. Each command string gets logged before being handled. Still stubbed out the logic for what happens in each case.
+
+March 23, 2025, 7:15 PM
+Added a history list to store input strings and results. This will be session-only and allow selection from previous entries.
+
+March 23, 2025, 7:20 PM
+Began work on the password command. Prompting for a new string or choosing from history. Havent linked to encryption subprocess yet.
+
+March 23, 2025, 7:30 PM
+Hooked up the PASS command to encryption. Sends PASS to the subprocess. Prints feedback to the user depending on RESULT or ERROR.
+
+March 23, 2025, 7:40 PM
+Input validation added to password input. Using regex to make sure input only contains alphabetic characters. Logs error if not valid.
+
+March 23, 2025, 7:50 PM
+Encrypt command now working. Prompts for new string or allows user to pick from history. Sends ENCRYPT to subprocess and stores the result in history.
+
+March 23, 2025, 8:00 PM
+Tested encrypt command with HELLO and password KEY. Got the correct result back. Logs the original and encrypted string.
+
+March 23, 2025, 8:05 PM
+Added the decrypt command using the same logic as encrypt. Result is also stored in history. Using DECRYPT command to encryption process.
+
+March 23, 2025, 8:10 PM
+Confirmed that encrypt and decrypt both store input and output in history. This allows them to be reused in later operations.
+
+March 23, 2025, 8:20 PM
+Tested edge cases for history selection. Added try/except to handle non-integer or invalid indexes in selection menus.
+
+March 23, 2025, 8:30 PM
+Added option 0 to all history menus for entering a new string. This gives flexibility and matches project spec.
+
+March 23, 2025, 8:40 PM
+Added the history command. Just prints each item in the history list with numbering. Useful for tracking whats been entered so far.
+
+March 23, 2025, 8:45 PM
+Input to all menu choices now case-insensitive. Users can type either the number or the full command name in any case.
+
+March 23, 2025, 8:50 PM
+Added QUIT handling. Sends QUIT to both subprocesses and exits cleanly. Also logs the shutdown as an EXIT event.
+
+March 23, 2025, 9:00 PM
+Tested full session from start to finish. Everything worked as expected. Menu responds to each command, subprocesses communicate properly, and logs are created.
+
+March 23, 2025, 9:10 PM
+Minor refactor of repeated history code. Created helper function to reduce redundancy between encrypt, decrypt, and password commands.
+
+March 23, 2025, 9:20 PM
+Improved error messages for invalid menu selections. Logs an error if a user enters something invalid.
+
+March 23, 2025, 9:30 PM
+Ensured that passwords are not stored in history or logged. This was required in the spec. Confirmed they are only used for PASS.
+
+March 23, 2025, 9:35 PM
+Did another full walkthrough with test inputs. History builds up as expected and can be reused. All outputs are clean and aligned.
+
+March 23, 2025, 9:40 PM
+Commit: Final version of driver with full menu support, subprocess communication, logging, history management, input validation, and shutdown
+
+
+
